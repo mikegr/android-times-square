@@ -95,8 +95,12 @@ public class MonthView extends LinearLayout {
 
   @Override protected void onFinishInflate() {
     super.onFinishInflate();
-    title = (TextView) findViewById(R.id.title);
-    grid = (CalendarGridView) findViewById(R.id.calendar_grid);
+    title = (TextView) findViewById(getIdentifier("title"));
+    grid = (CalendarGridView) findViewById(getIdentifier("calendar_grid"));
+  }
+
+  private int getIdentifier(String name) {
+    return getResources().getIdentifier(name, "id", getContext().getPackageName());
   }
 
   public void init(MonthDescriptor month, List<List<MonthCellDescriptor>> cells,
