@@ -112,18 +112,18 @@ public class CalendarPickerView extends ListView {
     Resources res = context.getResources();
     TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CalendarPickerView);
     final int bg = a.getColor(R.styleable.CalendarPickerView_android_background,
-        res.getColor(R.color.calendar_bg));
+        getColor(context, res, "calendar_bg"));
     dividerColor = a.getColor(R.styleable.CalendarPickerView_tsquare_dividerColor,
-        res.getColor(R.color.calendar_divider));
+            getColor(context, res, "calendar_divider"));
     dayBackgroundResId = a.getResourceId(R.styleable.CalendarPickerView_tsquare_dayBackground,
-        R.drawable.calendar_bg_selector);
+            R.drawable.calendar_bg_selector);
     dayTextColorResId = a.getResourceId(R.styleable.CalendarPickerView_tsquare_dayTextColor,
         R.color.calendar_text_selector);
     titleTextColor = a.getColor(R.styleable.CalendarPickerView_tsquare_titleTextColor,
-        res.getColor(R.color.calendar_text_active));
+            getColor(context, res, "calendar_text_active"));
     displayHeader = a.getBoolean(R.styleable.CalendarPickerView_tsquare_displayHeader, true);
     headerTextColor = a.getColor(R.styleable.CalendarPickerView_tsquare_headerTextColor,
-        res.getColor(R.color.calendar_text_active));
+            getColor(context, res, "calendar_text_active"));
     a.recycle();
 
     adapter = new MonthAdapter();
@@ -147,6 +147,10 @@ public class CalendarPickerView extends ListView {
       init(new Date(), nextYear.getTime()) //
           .withSelectedDate(new Date());
     }
+  }
+
+  private int getColor(Context ctx, Resources res, String name) {
+    return res.getColor(res.getIdentifier(name, "color", ctx.getPackageName()));
   }
 
   /**
